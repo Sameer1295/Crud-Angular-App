@@ -1,1 +1,66 @@
-<p>edit works!</p>
+<div class="container">
+    <h1>Update Employee</h1>
+  
+    <a href="#" routerLink="/employee/index" class="btn btn-primary">Back</a>
+        
+    <form [formGroup]="form" (ngSubmit)="submit()" enctype="multipart/form-data">
+  
+        <div class="form-group">
+            <label for="name">name:</label>
+            <input 
+                formControlName="name"
+                id="name" 
+                type="text" 
+                [(ngModel)]="employee.name"
+                class="form-control">
+            <div *ngIf="f.name.touched && f.name.invalid" class="alert alert-danger">
+                <div *ngIf="f.name.errors?.required">name is required.</div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="number">number:</label>
+            <input 
+            formControlName="number"
+                id="number" 
+                type="text" 
+                [(ngModel)]="employee.number"
+                class="form-control">
+            <div *ngIf="f.number.touched && f.number.invalid" class="alert alert-danger">
+                <div *ngIf="f.number.errors?.required">number is required.</div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="email">email:</label>
+            <input 
+            formControlName="email"
+                id="email" 
+                type="email" 
+                [(ngModel)]="employee.email"
+                class="form-control">
+            <div *ngIf="f.email.touched && f.email.invalid" class="alert alert-danger">
+                <div *ngIf="f.email.errors?.required">email is required.</div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <img src="{{'data:image/jpg;base64,' + employee.fileSource}}" class="img img-thumbnail m-2" style="height:20%;width:20%;"  />
+
+            <input 
+            formControlName="photo_url"
+                id="photo_url" 
+                type="file"
+                (change)="onFileSelected($event)" 
+                [(ngModel)]="employee.photo_url"
+                class="form-control">
+            <label for="filename" class="m-2">{{ employee.photo_url }}</label>
+            <!-- <div *ngIf="f.photo_url.touched && f.photo_url.invalid" class="alert alert-danger">
+                <div *ngIf="f.photo_url.errors?.required">photo_url is required.</div>
+            </div> -->
+        </div>
+         
+        
+        <button class="btn btn-primary" type="submit" >Update</button>
+    </form>
+</div>

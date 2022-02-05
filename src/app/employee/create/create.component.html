@@ -1,1 +1,58 @@
-<p>create works!</p>
+<div class="container">
+    <h1>Create New Employee</h1>
+  
+    <a href="#" routerLink="/employee/index" class="btn btn-primary">Back</a>
+        
+    <form [formGroup]="form" (ngSubmit)="submit()" enctype="multipart/form-data">
+  
+        <div class="form-group">
+            <label for="name">Name:</label>
+            <input 
+                formControlName="name"
+                id="name" 
+                type="text" 
+                class="form-control">
+            <div *ngIf="f.name.touched && f.name.invalid" class="alert alert-danger">
+                <div *ngIf="f.name.errors?.required">name is required.</div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="number">number:</label>
+            <input 
+            formControlName="number"
+                id="number" 
+                type="text" 
+                class="form-control">
+            <div *ngIf="f.number.touched && f.number.invalid" class="alert alert-danger">
+                <div *ngIf="f.number.errors?.required">number is required.</div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="photo_url">photo_url:</label>
+            <input 
+            formControlName="photo_url"
+                id="photo_url" 
+                type="file" 
+                (change)="onFileSelected($event)"
+                                class="form-control">
+            <div *ngIf="f.photo_url.touched && f.photo_url.invalid" class="alert alert-danger">
+                <div *ngIf="f.photo_url.errors?.required">photo_url is required.</div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="email">email:</label>
+            <input 
+            formControlName="email"
+                id="email" 
+                type="email" 
+                class="form-control">
+            <div *ngIf="f.email.touched && f.email.invalid" class="alert alert-danger">
+                <div *ngIf="f.email.errors?.required">email is required.</div>
+            </div>
+        </div>
+         
+        <button class="btn btn-primary" type="submit" [disabled]="!form.valid">Submit</button>
+    </form>
+</div>

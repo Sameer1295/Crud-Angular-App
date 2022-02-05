@@ -15,8 +15,17 @@ export class IndexComponent implements OnInit {
   ngOnInit(): void {
     this.employeeService.getAll().subscribe((data: Employee[])=>{
       this.employees = data;
+      const nn = typeof this.employees;
+      console.log('swegegw',nn);
       console.log('swegegw',this.employees);
     })  
+  }
+
+  deleteEmployee(id:number){
+    this.employeeService.delete(id).subscribe(res => {
+         this.employees = this.employees.filter(item => item.id !== id);
+         console.log('Employee deleted successfully!');
+    })
   }
 
 }
