@@ -51,8 +51,8 @@ export class EmployeeService {
     )
   }
 
-  update(id:number, formData: FormData): Observable<any> {
-    // console.log('dsgvdv',employee);
+  update(id:number, employee: Employee): Observable<any> {
+    console.log('dsgvdv',employee);
     // console.log('filesource',employee.fileSource);
     // const formData2: FormData = new FormData();
     // const file: any = employee.fileSource;
@@ -62,10 +62,10 @@ export class EmployeeService {
     // formData2.append('email',employee.email);
     // formData2.append('number',employee.number);
     // // console.log('formdata',formData2);
-    formData.forEach((value, key) => {
-      console.log("key %s: value %s", key, value);
-      })
-    return this.httpClient.put(this.apiURL + '/employee/' + id,formData,this.httpOptions)
+    // formData.forEach((value, key) => {
+    //   console.log("key %s: value %s", key, value);
+    //   })
+    return this.httpClient.put(this.apiURL + '/employee/' + id,employee,this.httpOptions)
     .pipe(
       catchError(this.errorHandler)
     )

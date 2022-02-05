@@ -76,7 +76,7 @@ export class EditComponent implements OnInit {
     formData2.append('number',this.form.value.number);
     formData2.append('photo_url',this.form.value.photo_url);
     // console.log('formdata',formData2);
-    this.employeeService.update(this.id, formData2).subscribe(res => {
+    this.employeeService.update(this.id, this.form.value).subscribe(res => {
          console.log('Employee updated successfully!');
          this.router.navigateByUrl('employee/index');
     })
