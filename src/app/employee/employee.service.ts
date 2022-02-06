@@ -53,19 +53,27 @@ export class EmployeeService {
 
   update(id:number, employee: Employee): Observable<any> {
     console.log('dsgvdv',employee);
+    return this.httpClient.put(this.apiURL + '/employee/' + id,employee,this.httpOptions)
+    .pipe(
+      catchError(this.errorHandler)
+    )
+  }
+
+  updateImage(id:number, employee: Employee): Observable<any> {
+    console.log('update image service',employee);
     // console.log('filesource',employee.fileSource);
-    // const formData2: FormData = new FormData();
-    // const file: any = employee.fileSource;
+    const formData2: FormData = new FormData();
+    const file: any = employee.fileSource;
     // console.log('file data',file);
-    // formData2.append('fileSource', file,file.name);
-    // formData2.append('name',employee.name);
+    formData2.append('fileSource', file,file.name);
+    formData2.append('id',id.toString());
     // formData2.append('email',employee.email);
     // formData2.append('number',employee.number);
     // // console.log('formdata',formData2);
-    // formData.forEach((value, key) => {
-    //   console.log("key %s: value %s", key, value);
-    //   })
-    return this.httpClient.put(this.apiURL + '/employee/' + id,employee,this.httpOptions)
+    formData2.forEach((value, key) => {
+      console.log("key %s: value %s", key, value);
+      })
+    return this.httpClient.post(this.apiURL + '/editImage',formData2)
     .pipe(
       catchError(this.errorHandler)
     )

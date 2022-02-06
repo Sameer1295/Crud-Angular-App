@@ -1,8 +1,8 @@
 <div class="container">
     <h1>All Employee Data</h1>
   
-    <a href="#" routerLink="/employee/create/" class="btn btn-success">Create New employee</a>
-    <table class="table table-bordered m-4">
+    <a href="#" routerLink="/employee/create/" class="btn btn-primary">Create New employee</a>
+    <table class="table table-bordered table-hover m-4">
       <thead>
         <tr>
             <th>ID</th>
@@ -18,9 +18,9 @@
             <td>{{ employee.name }}</td>
             <td>{{ employee.email }}</td>
             <td>
-              <a href="#" [routerLink]="['/employee/', employee.id, 'view']" class="btn btn-info">View</a>
-              <a href="#" [routerLink]="['/employee/', employee.id, 'edit']" class="btn btn-primary">Edit</a>
-              <button type="button" (click)="deleteEmployee(employee.id)" class="btn btn-danger">Delete</button>
+              <a href="#" [routerLink]="['/employee/', employee.id, 'view']" class="btn btn-sm btn-info">View</a>
+              <a href="#" [routerLink]="['/employee/', employee.id, 'edit']" class="btn btn-sm btn-primary mx-2">Edit</a>
+              <button type="button" (click)="deleteEmployee(employee.id)" class="btn btn-sm btn-danger">Delete</button>
             </td>
         </tr>
       </tbody>

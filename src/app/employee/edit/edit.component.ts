@@ -14,6 +14,8 @@ export class EditComponent implements OnInit {
   id: number;
   employee: Employee;
   form: FormGroup;
+  fileUploaded: boolean;
+  EditFile:boolean = false;
   constructor(
     public employeeService: EmployeeService,
     private route: ActivatedRoute,
@@ -21,7 +23,8 @@ export class EditComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.id = 8;//this.route.snapshot.params['id'];
+    this.id = this.route.snapshot.params['employeeId'];
+    console.log('id',this.id);
     this.employeeService.find(this.id).subscribe((data: Employee)=>{
       console.log('get by id',data);
       //return;
@@ -37,12 +40,16 @@ export class EditComponent implements OnInit {
     });
   }
 
+  editImage(){
+    this.EditFile = !this.EditFile;
+  }
   onFileSelected(event:any) {    
     if (event.target.files.length > 0) {
       const file = event.target.files[0];
       this.form.patchValue({
         fileSource: file
       });
+      this.fileUploaded = true;
     }
   }
 
@@ -70,13 +77,21 @@ export class EditComponent implements OnInit {
         const formData2: FormData = new FormData();
     const file: any = this.form.value.fileSource;
     console.log('file data',file);
-    formData2.set('fileSource', file,file.name);
-    formData2.append('name',this.form.value.name);
-    formData2.append('email',this.form.value.email);
-    formData2.append('number',this.form.value.number);
-    formData2.append('photo_url',this.form.value.photo_url);
+    // formData2.set('fileSource', file,file.name);
+    // formData2.append('name',this.form.value.name);
+    // formData2.append('email',this.form.value.email);
+    // formData2.append('number',this.form.value.number);
+    // formData2.append('photo_url',this.form.value.photo_url);
     // console.log('formdata',formData2);
     this.employeeService.update(this.id, this.form.value).subscribe(res => {
+         console.log('Employee updated successfully!');
+         this.router.navigateByUrl('employee/index');
+    })
+  }
+
+  imageUpdate(){
+    console.log('file update',this.form.value);
+    this.employeeService.updateImage(this.id, this.form.value).subscribe(res => {
          console.log('Employee updated successfully!');
          this.router.navigateByUrl('employee/index');
     })
